@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using TaskTimeManager.Models; // Import the namespace for your Task model
 
 namespace TaskTimeManager.Views
 {
@@ -10,25 +9,37 @@ namespace TaskTimeManager.Views
         public AddTaskWindow()
         {
             InitializeComponent();
-            NewTask = new Models.Task(); // Initialize a new Task
+            NewTask = new Models.Task();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            // Update NewTask with values from the UI
-            NewTask.Name = NameTextBox.Text;
-            NewTask.DueDate = DueDatePicker.SelectedDate ?? DateTime.Now;
-            NewTask.Priority = PriorityTextBox.Text;
-            NewTask.Status = StatusTextBox.Text;
+            try
+            {
+                ValidateInputs();
 
-            // TODO: Implement validation for the NewTask object
+                NewTask.Name = NameTextBox.Text;
+                NewTask.DueDate = DueDatePicker.SelectedDate ?? DateTime.Now;
+                NewTask.Priority = PriorityTextBox.Text;
+                NewTask.Status = StatusTextBox.Text;
 
-            this.DialogResult = true; // Closes the window and indicates success
+                this.DialogResult = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Input Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ValidateInputs()
+        {
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text))
+                throw new InvalidOperationException("Task Name cannot be empty.");
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false; // Closes the window and indicates cancellation
+            this.DialogResult = false;
         }
     }
 }

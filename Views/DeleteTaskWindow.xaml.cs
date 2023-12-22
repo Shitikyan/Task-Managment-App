@@ -11,7 +11,7 @@ namespace TaskTimeManager.Views
 
         private void YesButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Add delete logic
+            // Add delete logic here
             this.DialogResult = true;
         }
 

@@ -1,5 +1,6 @@
-﻿using System.Windows;
-using TaskTimeManager.Models; // Make sure to import the namespace for your Task model
+﻿using System;
+using System.Windows;
+using TaskTimeManager.Models;
 
 namespace TaskTimeManager.Views
 {
@@ -24,20 +25,17 @@ namespace TaskTimeManager.Views
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Update CurrentTask with new values from UI
             CurrentTask.Name = NameTextBox.Text;
             CurrentTask.DueDate = DueDatePicker.SelectedDate ?? DateTime.Now;
             CurrentTask.Priority = PriorityTextBox.Text;
             CurrentTask.Status = StatusTextBox.Text;
 
-            // TODO: Implement validation and database update logic here
-
-            this.DialogResult = true; // Closes the window and returns DialogResult.OK
+            this.DialogResult = true;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false; // Closes the window and returns DialogResult.Cancel
+            this.DialogResult = false;
         }
     }
 }
